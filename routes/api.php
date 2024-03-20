@@ -47,6 +47,9 @@ Route::group(['prefix' => 'products'], function (){
     Route::get('',[ProductController::class, 'index'])
         ->name('product.index');
 
+    Route::get('getProductForSlider',[ProductController::class, 'getProductForSlider'])
+        ->name('product.getProductForSlider');
+
     Route::get('create',[ProductController::class, 'create'])
         ->name('product.create');
 

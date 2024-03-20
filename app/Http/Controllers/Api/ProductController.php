@@ -21,7 +21,16 @@ class ProductController extends Controller
         $products = ProductResource::collection(
             Product::filter($request)->get()
         )->response()->getData(true);
-        dd('ff');
+
+        return $products;
+    }
+
+    public function getProductForSlider()
+    {
+        $products = ProductResource::collection(
+            Product::with('images')->inRandomOrder()->take(27)->get()
+        )->response()->getData(true);
+
         return $products;
     }
 

@@ -12,7 +12,6 @@
     @tailwind components;
     @tailwind utilities;
 
-
     @layer base {
 
         :root {
@@ -89,6 +88,19 @@
         font-variation-settings:
             "slnt" 0;
     }
+    input,
+    input:active,
+    input:focus,
+    a:focus{ outline: 0; outline-style:none; outline-width:0; }
+
+
+    button::-moz-focus-inner,
+    input[type="reset"]::-moz-focus-inner,
+    input[type="button"]::-moz-focus-inner,
+    input[type="submit"]::-moz-focus-inner,
+    input[type="file"] > input[type="button"]::-moz-focus-inner,
+    a
+    { border: none; }
     #app{
         @apply flex flex-col min-h-screen;
     }

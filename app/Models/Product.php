@@ -32,6 +32,21 @@ class Product extends Model
             ->where('model_type', File::TYPES['product'])->where('type', $type);
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(File::class, 'model_id')
+            ->where('model_type', File::TYPES['product'])
+            ->where('type', File::TYPE['images']);
+    }
+
+    public function cover(): HasMany
+    {
+        return $this->hasMany(File::class, 'model_id')
+            ->where('model_type', File::TYPES['product'])
+            ->where('type', File::TYPE['images'])
+            ->orderBy('id')
+            ->first();
+    }
 
     public function categories(): BelongsToMany
     {

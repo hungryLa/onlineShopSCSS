@@ -16,10 +16,13 @@ class CategoryController extends Controller
     public function index()
     {
         try {
+            $categories = Category::orderBy('id')->with([
+                'products'
+            ])->get();
 
-            $categories = CategoryWithProductsResource::collection(
-                Category::orderBy('id')->get()
-            )->response()->getData();
+            $categories = CategoryResource::collection($categories)
+                ->response()
+                ->getData();
 
             return response()->json([
                 'categories' => $categories
