@@ -17,9 +17,12 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $category = Category::inRandomOrder()->limit(1)->first();
+        $parent_id = $category?->id;
         return [
+            'parent_id' => $parent_id,
             'type' => $this->faker->randomElement(Category::TYPES),
-            'title' => $this->faker->text(50),
+            'title' => $this->faker->text(15),
         ];
     }
 }

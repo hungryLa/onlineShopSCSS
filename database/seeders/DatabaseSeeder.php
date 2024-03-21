@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Shop;
+use App\Models\Shop1;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\File;
@@ -34,6 +36,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Category::factory(10)->create();
+
+        Shop::factory(10)->create();
+
         Product::factory(40)->afterCreating(function (Product $product){
             File::create([
                 'model_type' => File::TYPES['product'],

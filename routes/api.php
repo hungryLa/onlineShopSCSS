@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\Api\ShopController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,6 +41,25 @@ Route::group(['prefix' => 'categories'],function () {
 
     Route::delete('{category}/delete', [CategoryController::class, 'destroy'])
         ->name('category.destroy');
+});
+
+Route::group(['prefix' => 'shops'], function (){
+
+    Route::get('',[ShopController::class, 'index'])
+        ->name('shop.index');
+
+    Route::post('store',[ShopController::class, 'store'])
+        ->name('shop.store');
+
+    Route::get('{shop}',[ShopController::class, 'getOne'])
+        ->name('shop.getOne');
+
+    Route::patch('{shop}/update',[ShopController::class,'update'])
+        ->name('shop.update');
+
+    Route::delete('{shop}/delete', [ShopController::class, 'destroy'])
+        ->name('shop.delete');
+
 });
 
 Route::group(['prefix' => 'products'], function (){

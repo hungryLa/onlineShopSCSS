@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Http\Controllers\FileController;
 use App\Models\File;
 use App\Models\Product;
+use App\Models\Shop;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -36,6 +37,7 @@ class ProductFactory extends Factory
 //        ]);
 
         return [
+            'shop_id' => Shop::inRandomOrder()->limit(1)->first()->id,
             'title' => $this->faker->text(50),
             'price' => random_int(1000, 5000),
         ];

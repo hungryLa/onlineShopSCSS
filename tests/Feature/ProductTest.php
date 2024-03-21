@@ -50,13 +50,13 @@ class ProductTest extends TestCase
             'price' => 2000,
         ]);
 
-        $response->assertOk();
 
         $this->assertDatabaseHas('products', [
             'title' => 'Test update',
             'price' => 2000,
         ]);
 
+        $response->assertOk();
     }
 
     public function test_product_delete()
@@ -72,8 +72,6 @@ class ProductTest extends TestCase
 
         $response = $this->delete("api/products/{$product->id}/delete");
 
-        $response->assertOk();
-
         $this->assertDatabaseMissing('products', [
             'id' => $product->id,
         ]);
@@ -83,5 +81,7 @@ class ProductTest extends TestCase
                 'product_id' => $product_id,
             ]);
         }
+
+        $response->assertOk();
     }
 }

@@ -12,7 +12,7 @@ const {y} = useWindowScroll()
 
 const headerStore = useHeaderStore()
 const products = ref<Product[]>([])
-
+let lengthProducts = 0;
 const getProducts = async () => {
     const all = await axios.get<Product[], any>('/api/products/getProductForSlider');
 
@@ -33,7 +33,7 @@ const handleScroll = () => {
 
 onMounted(async () => {
     products.value = await getProducts();
-    console.log(products);
+    lengthProducts = products.value.length - 1
     window.addEventListener('scroll', handleScroll)
 })
 
@@ -45,13 +45,6 @@ onUnmounted(() => {
 <template>
     <section class="running_slider">
         <div class="running_slider__inner">
-            <div :class="{'running_slider__inner__row' :true, 'running_slider__inner__row-odd': index % 2 == 1, 'running_slider__inner__row-even': index % 2 == 0  }" v-for="(product_list, index) in products">
-                <div :class="{ 'running_slider__inner__row-odd__el': index % 2 == 1, 'running_slider__inner__row-even__el': index % 2 == 0, 'running_slider__inner__row-odd__el_1': index % 2 == 1, 'running_slider__inner__row-even__el_1': index % 2 == 0,}">
-                    <SliderCard v-for="(product) in product_list" class="running_slider__inner__card" :key="product.id" :product="product" />
-                    <SliderCard v-for="(product) in product_list" class="running_slider__inner__card" :key="product.id" :product="product" />
-                </div>
-            </div>
-
             <div class="running_slider__search">
                 <div class="running_slider__search__spot"></div>
                 <div class="running_slider__search__svg">
@@ -59,6 +52,18 @@ onUnmounted(() => {
                 </div>
                 <ClientSearchInput ref="searchRef"></ClientSearchInput>
             </div>
+
+            <div :class="{'running_slider__inner__row' :true, 'running_slider__inner__row-odd': index % 2 == 1, 'running_slider__inner__row-even': index % 2 == 0  }" v-for="(product_list, index) in products">
+                <div :class="{
+                    'running_slider__inner__row-odd__el': index % 2 == 1,
+                    'running_slider__inner__row-even__el': index % 2 == 0,
+                    'running_slider__inner__row-last': lengthProducts == index,
+                      }">
+                    <SliderCard v-for="(product) in product_list" class="running_slider__inner__card" :key="product.id" :product="product" />
+                    <SliderCard v-for="(product) in product_list" class="running_slider__inner__card" :key="product.id" :product="product" />
+                </div>
+            </div>
+
         </div>
     </section>
     <section class="news">
@@ -161,18 +166,20 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .running_slider {
-    @apply h-[624px] max-w-full relative;
+    @apply max-w-full relative;
 
     &__inner {
-        @apply h-full;
+        @apply h-full z-10;
 
         &__row{
-            @apply flex flex-row justify-around w-[200%] mb-3 gap-3;
+            @apply flex flex-row justify-around w-[200%] mb-3 gap-3 ;
 
         }
+
         &__row:hover {
             animation-play-state: paused;
         }
+
         &__row-odd{
             animation: marquee_left 60s linear infinite;
 
@@ -181,13 +188,16 @@ onUnmounted(() => {
             }
         }
 
-
         &__row-even{
             animation: marquee_right 60s linear infinite;
             &__el{
                 @apply flex flex-row justify-center w-full gap-3;
             }
 
+        }
+
+        &__row-last{
+            @apply hidden md:flex;
         }
 
         @keyframes marquee_right {
@@ -210,7 +220,7 @@ onUnmounted(() => {
 
     &__search {
 
-        @apply absolute top-1/4 left-1/2 -translate-x-1/2  flex flex-col gap-12  text-muted-foreground rounded-lg p-2 items-center;
+        @apply z-20 md:absolute md:top-1/4 md:left-1/2 md:-translate-x-1/2  flex flex-col gap-12  text-muted-foreground rounded-lg p-2 items-center;
 
         &__spot {
             @apply absolute top-[-480px] hidden size-[800px] justify-center rounded-lg md:flex;

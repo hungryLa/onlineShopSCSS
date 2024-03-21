@@ -15,6 +15,7 @@ class File extends Model
 
     const TYPES = [
         'product' => Product::TYPE,
+        'feedback' => Feedback::TYPE,
     ];
 
     const MAX_FILES = [

@@ -88,6 +88,11 @@
         font-variation-settings:
             "slnt" 0;
     }
+
+    body{
+        overflow-x: hidden;
+    }
+
     input,
     input:active,
     input:focus,

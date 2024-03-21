@@ -39,7 +39,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
     .header{
-        @apply z-20 sticky top-0 mb-2 bg-white min-h-[77px] p-4 border-b-2;
+        @apply z-30 sticky top-0 mb-2 bg-white min-h-[77px] p-4 border-b-2;
 
         &__inner{
             @apply w-full py-1 flex justify-between items-center;
