@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Slug;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,12 +18,31 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $category = Category::inRandomOrder()->limit(1)->first();
-        $parent_id = $category?->id;
+
         return [
-            'parent_id' => $parent_id,
-            'type' => $this->faker->randomElement(Category::TYPES),
+            'parent_id' => null,
             'title' => $this->faker->text(15),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Category $category){
+
+            $parent_category = Category::inRandomOrder()->limit(1)->first();
+
+            if($parent_category->id != $category->id){
+                $parent_id = $parent_category?->id;
+                $category->update([
+                    'parent_id' => $parent_id,
+                ]);
+            }
+
+            Slug::create([
+                'reference_type' => Category::class,
+                'reference_id' => $category->id,
+            ]);
+
+        });
     }
 }

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
+use App\Models\Shop;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -22,6 +23,7 @@ class ProductTest extends TestCase
     public function test_product_store()
     {
         $response = $this->post('/api/products/store', [
+            'shop_id' => Shop::all()->random()->id,
             'title' => 'Test',
             'price' => 1900,
         ]);

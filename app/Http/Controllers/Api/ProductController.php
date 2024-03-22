@@ -48,8 +48,9 @@ class ProductController extends Controller
     public function store(StoreRequest $request)
     {
         try {
+            $data = $request->validated();
 
-            return Product::create($request->validated());
+            return Product::create($data);
 
         } catch (\Exception $exception) {
             return response()->json([

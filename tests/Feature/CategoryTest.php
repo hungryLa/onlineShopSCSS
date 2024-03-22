@@ -19,6 +19,7 @@ class CategoryTest extends TestCase
     public function test_category_index(): void
     {
         $categories = Category::factory(20)->create();
+
         $response = $this->get('/api/categories');
 
         $response->assertOk();
@@ -28,7 +29,6 @@ class CategoryTest extends TestCase
     public function test_category_store()
     {
         $response = $this->post('/api/categories/store',[
-            'type' => Category::TYPES['clothes'],
             'title' => 'Test',
         ]);
 
@@ -57,7 +57,6 @@ class CategoryTest extends TestCase
         $category = Category::find(1);
 
         $response = $this->patch("/api/categories/$category->id/update", [
-            'type' => Category::TYPES['clothes'],
             'title' => 'Change title',
         ]);
 

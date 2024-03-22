@@ -39,17 +39,10 @@ class DatabaseSeeder extends Seeder
 
         Shop::factory(10)->create();
 
-        Product::factory(40)->afterCreating(function (Product $product){
-            File::create([
-                'model_type' => File::TYPES['product'],
-                'model_id' => $product->id,
-                'type' => File::TYPE['images'],
-                'position' => File::getPosition(File::TYPES['product'],$product->id,File::TYPE['images']),
-                'name' => 'g',
-                'original_name' => 'ggg',
-                'path' => 'https://img.freepik.com/free-photo/forest-landscape_71767-127.jpg?w=996&t=st=1710849095~exp=1710849695~hmac=b4f53e07c79440dee86118d1d5cf38b8b612b604b2140bd9ef4b9f47324a99a2',
-            ]);
-        })->create();
+        Product::factory(40)->create();
+
         CategoryProduct::factory(60)->create();
+
+        $this->call(SlugSeeder::class);
     }
 }

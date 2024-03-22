@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class File extends Model
 {
@@ -22,6 +22,11 @@ class File extends Model
         'images' => 4,
         'documents' => 1,
     ];
+
+    public function model(): MorphTo
+    {
+        return $this->morphTo();
+    }
 
     static function getPosition($modelType, $modelId, $fileType)
     {

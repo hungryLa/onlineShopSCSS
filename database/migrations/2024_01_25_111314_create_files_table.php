@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->id();
 
-            $table->enum('model_type', File::TYPES);
+            $table->string('model_type');
             $table->unsignedBigInteger('model_id');
 
             $table->enum('type', File::TYPE);

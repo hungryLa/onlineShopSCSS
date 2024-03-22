@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Product extends Model
 {
@@ -19,26 +20,23 @@ class Product extends Model
     const TYPE = 'product';
 
     const MAX_FILES = [
-        'images' => 30
+        'images' => 6
     ];
 
     public function scopeFilter(Builder $builder, QueryFilter $filter)
     {
         return $filter->apply($builder);
     }
-
-    public function files($type = null): HasMany
+    public function files(): MorphMany
     {
-        return $this->hasMany(File::class, 'model_id')
-            ->where('model_type', File::TYPES['product'])->where('type', $type);
+        return $this->morphMany(File::class,'model');
     }
-
-    public function images(): HasMany
+    public function images(): MorphMany
     {
-        return $this->hasMany(File::class, 'model_id')
-            ->where('model_type', File::TYPES['product'])
+        return $this->morphMany(File::class,'model')
             ->where('type', File::TYPE['images']);
     }
+
 
     public function cover(): HasMany
     {

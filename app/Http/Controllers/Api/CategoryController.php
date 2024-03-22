@@ -8,6 +8,7 @@ use App\Http\Requests\Category\UpdateRequest;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Category\CategoryWithProductsResource;
 use App\Models\Category;
+use App\Models\Slug;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -41,6 +42,11 @@ class CategoryController extends Controller
         $data = $request->validated();
 
         $category = Category::create($data);
+
+        Slug::create([
+            'reference_type' => Category::class,
+            'reference_id' => $category->id,
+        ]);
 
         return new CategoryResource($category);
     }
