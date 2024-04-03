@@ -5,6 +5,8 @@ import {Heart, ShoppingCart} from 'lucide-vue-next';
 import {onMounted, ref} from "vue";
 import {useHeaderStore} from "@/store/headerStore";
 import ClientSearchInput from "@/components/client/search/ClientSearchInput.vue";
+import {Dialog, DialogContent, DialogHeader, DialogTrigger} from "@/components/ui/dialog";
+import AuthForm from "@/components/client/auth/AuthForm.vue";
 
 const header = ref<any>(null)
 const headerStore = useHeaderStore()
@@ -30,7 +32,12 @@ onMounted(() => {
                 <SButton variant="ghost" size="icon" class="header__nav__button">
                     <ShoppingCart/>
                 </SButton>
-                <SButton class="text" variant="secondary">Sign in</SButton>
+                <Dialog>
+                    <DialogTrigger as-child>
+                        <SButton class="text" variant="secondary">Sign in</SButton>
+                    </DialogTrigger>
+                    <AuthForm />
+                </Dialog>
             </div>
         </div>
     </header>

@@ -6,7 +6,7 @@ defineProps([
 </script>
 
 <template>
-    <a :href="`api/products/${product.id}`" class="slider_card">
+    <a :href="`api/products/${product.slug}`" class="slider_card">
         <img v-if="product" :src="product?.images[0]?.path" alt="{{product.title}}">
     </a>
 </template>

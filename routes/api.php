@@ -76,7 +76,7 @@ Route::group(['prefix' => 'products'], function (){
     Route::post('store',[ProductController::class, 'store'])
         ->name('product.store');
 
-    Route::get('{product}',[ProductController::class, 'getOne'])
+    Route::get('{slug}',[ProductController::class, 'getOne'])
         ->name('product.getOne');
 
     Route::get('{product}/edit',[ProductController::class,'edit'])

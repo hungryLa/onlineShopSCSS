@@ -13,11 +13,6 @@ class File extends Model
         'documents' => 'documents',
     ];
 
-    const TYPES = [
-        'product' => Product::TYPE,
-        'feedback' => Feedback::TYPE,
-    ];
-
     const MAX_FILES = [
         'images' => 4,
         'documents' => 1,

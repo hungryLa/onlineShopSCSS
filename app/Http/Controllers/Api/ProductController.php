@@ -7,6 +7,7 @@ use App\Http\Requests\Product\StoreRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
+use App\Models\Slug;
 use Illuminate\Http\Request;
 use App\Filters\ProductFilter;
 
@@ -62,9 +63,11 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function getOne(Product $product)
+    public function getOne(string $slug)
     {
-        return new ProductResource($product);
+        $slug = Slug::where('key', $slug)->first();
+
+        return new ProductResource($slug->reference);
     }
 
     /**

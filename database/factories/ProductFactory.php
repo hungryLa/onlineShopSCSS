@@ -6,6 +6,7 @@ use App\Http\Controllers\FileController;
 use App\Models\File;
 use App\Models\Product;
 use App\Models\Shop;
+use App\Models\Slug;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -33,10 +34,15 @@ class ProductFactory extends Factory
                 'model_type' => Product::class,
                 'model_id' => $product->id,
                 'type' => File::TYPE['images'],
-                'position' => File::getPosition(File::TYPES['product'],$product->id,File::TYPE['images']),
+                'position' => File::getPosition(Product::class,$product->id,File::TYPE['images']),
                 'name' => $this->faker->title,
                 'original_name' => $this->faker->title,
                 'path' => $this->faker->imageUrl,
+            ]);
+
+            Slug::create([
+                'reference_type' => Product::class,
+                'reference_id' => $product->id,
             ]);
         });
     }

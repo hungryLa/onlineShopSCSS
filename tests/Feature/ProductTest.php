@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Product;
 use App\Models\Shop;
+use App\Models\Slug;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,6 +16,12 @@ class ProductTest extends TestCase
      */
     public function test_product_index(): void
     {
+//        foreach (Product::all() as $product){
+//            Slug::create([
+//                'reference_type' => Product::class,
+//                'reference_id' => $product->id,
+//            ]);
+//        }
         $response = $this->get('/api/products?title=a&categories[]=1&categories[]=4');
 
         $response->assertStatus(200);
@@ -36,8 +43,9 @@ class ProductTest extends TestCase
 
     public function test_product_get_one()
     {
-        $product = Product::all()->random();
-        $response = $this->get("/api/products/{$product->id}");
+        $slug = Slug::where('reference_type', Product::class)->get()->random();
+        $product = $slug->reference;
+        $response = $this->get("/api/products/{$slug->key}");
 
         $response = $response->assertJsonPath('data.title', $product->title);
         $response->assertOk();

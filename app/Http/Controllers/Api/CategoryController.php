@@ -59,6 +59,7 @@ class CategoryController extends Controller
     public function update(UpdateRequest $request, Category $category)
     {
         $data = $request->validated();
+        $result = $category->update($data);
 
         return $category->update($data);
     }

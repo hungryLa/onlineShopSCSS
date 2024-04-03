@@ -9,5 +9,6 @@ export const pathKeys = {
                 return pathKeys.client.products.root().concat(`/${id ? id : ':id'}`)
             }
         }
+
     }
 }
