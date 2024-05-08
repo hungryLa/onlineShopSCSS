@@ -2,6 +2,8 @@
 
 import ClientHeader from "../components/client/ClientHeader.vue";
 import ClientFooter from "@/components/client/ClientFooter.vue";
+
+
 </script>
 
 <template>

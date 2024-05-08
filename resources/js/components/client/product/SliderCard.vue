@@ -13,7 +13,7 @@ defineProps([
 
 <style scoped lang="scss">
     .slider_card{
-        @apply border rounded-xl overflow-auto min-w-[100px] max-w-[200px] aspect-square;
+        @apply rounded-xl overflow-auto min-w-[100px] max-w-[200px] aspect-square border-border;
 
         img{
             @apply object-cover h-full

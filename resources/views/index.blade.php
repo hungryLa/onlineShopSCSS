@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:wght@400..900&display=swap" rel="stylesheet">
     <title>Jopa Shop</title>
 </head>
-<body>
+<body class="bg-background">
 <div id="app"></div>
 
 @vite(['resources/js/app.ts'])

@@ -9,7 +9,8 @@ export const messages = {
 
         },
         message: {
-            hello: 'Привет'
+            hello: 'Привет',
+            auth: 'Авторизация'
         }
     }
 }

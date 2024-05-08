@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {onMounted, onUnmounted, ref} from "vue";
+import {onMounted, onUnmounted, ref, watch} from "vue";
 import {useWindowScroll} from "@vueuse/core";
 import {useHeaderStore} from "@/store/headerStore";
 import ClientSearchInput from "@/components/client/search/ClientSearchInput.vue";
@@ -13,6 +13,7 @@ const {y} = useWindowScroll()
 const headerStore = useHeaderStore()
 const products = ref<Product[]>([])
 let lengthProducts = 0;
+
 const getProducts = async () => {
     const all = await axios.get<Product[], any>('/api/products/getProductForSlider');
 
@@ -69,6 +70,7 @@ onUnmounted(() => {
     <section class="news">
         <div class="container">
             <div class="news__inner">
+
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam est id impedit incidunt ipsa
                     laudantium nobis porro, quam quisquam quo quos reprehenderit tempora voluptate! Ab accusantium amet,
                     cum debitis dolores eligendi enim incidunt iusto laborum molestiae, possimus quibusdam repellendus,

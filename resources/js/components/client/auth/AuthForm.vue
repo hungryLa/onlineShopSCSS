@@ -14,6 +14,7 @@ import {
 import {SButton} from "@/components/ui/button";
 import {SInput} from "@/components/ui/input";
 import {authSchema} from "@/lib/validators/auth";
+import axios from "axios";
 
 
 const form = useForm({
@@ -21,13 +22,14 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit((values ) => {
+    axios.post('/login',[values])
     console.log('Form submitted!', values)
 })
 </script>
 
 <template>
     <DialogContent>
-        <DialogHeader>{{$t("message.hello")}}</DialogHeader>
+        <DialogHeader>{{$t("message.auth")}}</DialogHeader>
         <form @submit="onSubmit">
             <FormField v-slot="{ componentField }" name="email">
                 <FormItem class="flex-item">
